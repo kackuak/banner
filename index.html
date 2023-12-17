@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smilingbread2137 Stream</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            width: 450px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            border-radius: 15px;
+            z-index: -1;
+        }
+
+        .banner.tiktok {
+            background: linear-gradient(to right, #000000, #400ad3);
+        }
+
+        .banner.youtube {
+            background: linear-gradient(to right, rgb(121, 0, 0), #000000);
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 1;
+            filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.7));
+            opacity: 0;
+            animation: fadeInOut 8s ease-in-out infinite;
+        }
+
+        .text {
+            color: #fff;
+            font-size: 24px;
+            text-align: center;
+            margin-top: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            animation: fadeInOut 8s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+
+            25%, 75% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bannerAnimation {
+            0%, 100% {
+                opacity: 0;
+            }
+
+            50%, 75% {
+                opacity: 1;
+            }
+        }
+
+        .container.tiktok .banner.tiktok, .container.youtube .banner.youtube {
+            animation: bannerAnimation 8s linear infinite;
+        }
+
+        .container.tiktok .logo, .container.youtube .logo {
+            animation: fadeInOut 8s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container tiktok">
+        <div class="banner tiktok"></div>
+        <div class="logo tiktok"></div>
+        <div class="text">Smilingbread2137</div>
+    </div>
+
+    <script>
+        setInterval(() => {
+            const container = document.querySelector('.container');
+            container.classList.toggle('tiktok');
+            container.classList.toggle('youtube');
+
+            const banner = document.querySelector('.banner');
+            const isTikTok = container.classList.contains('tiktok');
+            const logo = document.querySelector('.logo');
+            const text = document.querySelector('.text');
+
+            if (isTikTok) {
+                logo.style.backgroundImage = 'url("tiktok_logo.png")';
+                banner.classList.remove('youtube');
+                banner.classList.add('tiktok');
+            } else {
+                logo.style.backgroundImage = 'url("youtube_logo.png")';
+                banner.classList.remove('tiktok');
+                banner.classList.add('youtube');
+            }
+
+            text.style.animation = 'none';
+            logo.style.animation = 'none';
+
+            setTimeout(() => {
+                text.style.animation = 'fadeInOut 8s ease-in-out infinite';
+                logo.style.animation = 'fadeInOut 8s ease-in-out infinite';
+            }, 100);
+        }, 8000);
+    </script>
+</body>
+
+</html>
